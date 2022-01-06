@@ -5,12 +5,14 @@ const port = 3000
 
 
 app.use(cors())
+app.use(express.json())
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
 
-
+/*Statisztika-----------------------------------------------------------------------------------------------------*/
 app.get('/statisztika', (req, res) => {
   var mysql = require('mysql')
   var connection = mysql.createConnection({
@@ -34,7 +36,7 @@ app.get('/statisztika', (req, res) => {
 
   
 })
-
+/*rendezések-----------------------------------------------------------------------------------------------------*/
 app.get('/rend_pont', (req, res) => {
   var mysql = require('mysql')
   var connection = mysql.createConnection({
@@ -126,6 +128,32 @@ app.get('/rend_date', (req, res) => {
 
 
   
+})
+/*értékelés-----------------------------------------------------------------------------------------------------*/
+app.post('/ertekeles', (req, res) => {
+  var mysql = require('mysql')
+  var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'project_m'
+  })
+  
+  connection.connect()
+  let dt=new Date();
+  let teljesdat=dt.getFullYear()+"-"+(dt.getMonth()+1)+"-"+dt.getDate();
+  connection.query("INSERT INTO ertekeles  VALUES (NULL, '"+req.body.bevitel1+"', '"+req.body.bevitel2+"', '"+teljesdat+"')", function (err, rows, fields) {
+    //connection.query("INSERT INTO ertekeles  VALUES (NULL, 'wad', 'ddawda', '2022-01-06')", function (err, rows, fields) {  
+  
+    if (err) throw err
+  
+    console.log("Sikeres felvitel!")
+    res.send("Sikeres felvitel!")
+  })
+  
+  connection.end()
+  
+
 })
 
 app.listen(port, () => {
