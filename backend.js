@@ -19,7 +19,7 @@ app.get('/statisztika', (req, res) => {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'project_m'
+    database: 's4_Project_M'
   })
   
   connection.connect()
@@ -43,7 +43,7 @@ app.get('/rend_pont', (req, res) => {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'project_m'
+    database: 's4_Project_M'
   })
   
   connection.connect()
@@ -66,7 +66,7 @@ app.get('/rend_halal', (req, res) => {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'project_m'
+    database: 's4_Project_M'
   })
   
   connection.connect()
@@ -89,7 +89,7 @@ app.get('/rend_ido', (req, res) => {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'project_m'
+    database: 's4_Project_M'
   })
   
   connection.connect()
@@ -113,7 +113,7 @@ app.get('/rend_date', (req, res) => {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'project_m'
+    database: 's4_Project_M'
   })
   
   connection.connect()
@@ -137,7 +137,7 @@ app.post('/ertekeles', (req, res) => {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'project_m'
+    database: 's4_Project_M'
   })
   
   connection.connect()
@@ -156,18 +156,18 @@ app.post('/ertekeles', (req, res) => {
   
 
 })
-app.get('/statisztika', (req, res) => {
+app.get('/ertekeles_uzenet', (req, res) => {
   var mysql = require('mysql')
   var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'project_m'
+    database: 's4_Project_M'
   })
   
   connection.connect()
   
-  connection.query('SELECT * from statisztika', function (err, rows, fields) {
+  connection.query('SELECT * from ertekeles', function (err, rows, fields) {
     if (err) throw err
   
     console.log(rows);
