@@ -106,6 +106,7 @@ app.get('/rend_ido', (req, res) => {
 
   
 })
+
 app.get('/rend_date', (req, res) => {
   var mysql = require('mysql')
   var connection = mysql.createConnection({
@@ -154,6 +155,29 @@ app.post('/ertekeles', (req, res) => {
   connection.end()
   
 
+})
+app.get('/statisztika', (req, res) => {
+  var mysql = require('mysql')
+  var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'project_m'
+  })
+  
+  connection.connect()
+  
+  connection.query('SELECT * from statisztika', function (err, rows, fields) {
+    if (err) throw err
+  
+    console.log(rows);
+    res.send(rows);
+  })
+  
+  connection.end()
+
+
+  
 })
 
 app.listen(port, () => {
