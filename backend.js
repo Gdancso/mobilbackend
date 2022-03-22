@@ -130,6 +130,55 @@ app.get('/rend_date', (req, res) => {
 
   
 })
+/*Hírek---------------------------------------------------------------------------------------------------------------*/
+app.post('/Hirek_fel', (req, res) => {
+  var mysql = require('mysql')
+  var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 's4_Project_M'
+  })
+  
+  connection.connect()
+  let dt=new Date();
+  let teljesdat=dt.getFullYear()+"-"+(dt.getMonth()+1)+"-"+dt.getDate();
+  connection.query("INSERT INTO hirek VALUES (NULL, '"+req.body.bevitel1+"', '"+req.body.bevitel2+"', '"+teljesdat+"')", function (err, rows, fields) {
+    if (err) throw err
+  
+    console.log("Sikeres felvitel!")
+    res.send("Sikeres felvitel!")
+  })
+  
+  connection.end()
+  
+
+})
+
+app.get('/hirek_szoveg', (req, res) => {
+  var mysql = require('mysql')
+  var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 's4_Project_M'
+  })
+  
+  connection.connect()
+  
+  connection.query('SELECT * from hirek', function (err, rows, fields) {
+    if (err) throw err
+  
+    console.log(rows);
+    res.send(rows);
+  })
+  
+  connection.end()
+
+
+  
+})
+
 /*értékelés-----------------------------------------------------------------------------------------------------*/
 app.post('/ertekeles', (req, res) => {
   var mysql = require('mysql')
